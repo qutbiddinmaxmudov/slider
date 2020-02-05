@@ -13,7 +13,17 @@ class Slider {
     this.moveDistance = this.direction == "X" ? this.maxWidth() + 'px' : this.maxHeight() + 'px'
     this.autoPlay = obj.autoPlay?true:false
     this.autoPlayTime = obj.autoPlayTime?obj.autoPlayTime<3000?3000:obj.autoPlayTime:5000 
-    this.timeOut = this.autoMove();
+
+
+
+    this.timeOut = setTimeout(() => {
+      this.move(this.next, '');
+      this.btnDisable([this.prev,this.next]);
+      this.timeOut;
+    }, this.autoPlayTime)
+
+
+
     this.next.addEventListener('click', () => this.btnClick(this.next))
     this.prev.addEventListener('click', () => this.btnClick(this.prev))
     for (let i = 0; i < this.images.length; i++) {
@@ -24,7 +34,6 @@ class Slider {
       `
       }
     }
-    
   }
  
   btnClick(btn){
@@ -36,15 +45,6 @@ class Slider {
     this.btnDisable([this.prev,this.next])
     clearTimeout(this.timeOut);
     setTimeout(this.autoMove, this.autoPlayTime*2);
-  }
-
-  autoMove(){
-    return setTimeout(() => {
-      this.move(this.next, '');
-      this.btnDisable([this.prev,this.next]);
-      this.autoMove();
-    }, this.autoPlayTime);
-    
   }
   maxHeight() {
     let maxHeight = 0;
