@@ -15,6 +15,7 @@ class Slider {
     this.autoPlayTime = obj.autoPlayTime?obj.autoPlayTime<3000?3000:obj.autoPlayTime:5000 
     this.next.addEventListener('click', () => this.btnClick(this.next))
     this.prev.addEventListener('click', () => this.btnClick(this.prev))
+    this.prev.addEventListener('mouseover', () => this.moveDebug())
     for (let i = 0; i < this.images.length; i++) {
       const img = this.images[i];
       if (i !== this.active) {
@@ -23,6 +24,7 @@ class Slider {
       `
       }
     }
+    if(this.autoPlay){this.autoMove()}
   }
  
   btnClick(btn){
@@ -67,6 +69,17 @@ class Slider {
       setTimeout(() => {
         btn.disabled = false
       }, this.transition);
+    }
+  }
+  moveDebug(){
+    for (let i = 0; i < this.images.length; i++) {
+      const img = this.images[i];
+      if (i !== this.active) {
+        img.style = `
+        transform:translate${this.direction}(-${this.moveDistance});
+        transition:none;
+        `
+      }
     }
   }
 
