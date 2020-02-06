@@ -50,10 +50,12 @@ class Slider {
       `
       document.head.append(killBug)
     this.sliderLine.style.height = this.maxHeight() + 'px'
-    this.next.addEventListener('click', () => this.btnClick(this.next))
+    if (this.next && this.prev) {
+      this.next.addEventListener('click', () => this.btnClick(this.next))
     this.prev.addEventListener('click', () => this.btnClick(this.prev))
     this.prev.addEventListener('mouseover', () => this.moveDebug('-'))
     this.next.addEventListener('mouseover', () => this.moveDebug(''))
+    }
   }
 
   createBtn() {
@@ -173,8 +175,26 @@ const slider = new Slider({
 const slider2 = new Slider({
   name: '#slider2',
   direction: 'y',
-  transition: 1000,
-  autoPlay: false,
+  transition: 500,
+  autoPlay: true,
+  autoPlayTime: 3000,
+  button: false
+})
+
+const slider3 = new Slider({
+  name: '#slider3',
+  direction: 'x',
+  transition: 1500,
+  autoPlay: true,
+  autoPlayTime: 3000,
+  button: true
+})
+
+const slider4 = new Slider({
+  name: '#slider4',
+  direction: 'x',
+  transition: 5000,
+  autoPlay: true,
   autoPlayTime: 3000,
   button: true
 })
