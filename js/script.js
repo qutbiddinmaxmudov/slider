@@ -36,6 +36,7 @@ class Slider {
       }
     }
     if (this.autoPlay) { this.autoMove() }
+    
     if (obj.button) {
       if (!this.next && !this.prev) {
         this.createBtn()
@@ -65,8 +66,9 @@ class Slider {
     this.next.setAttribute('id', 'next')
     this.prev.className = 'prev fas fa-arrow-left'
     this.prev.setAttribute('id', 'prev')
-    for (let i = 0; i < document.body.children.length; i++) {
-      const element = document.body.children[i];
+    const sliders = document.querySelectorAll('.slider')
+    for (let i = 0; i < sliders.length; i++) {
+      const element = sliders[i];
       if (!element.button && !element.next && !element.prev && element.classList.contains("slider")) {
         this.slider.append(this.next)
         this.slider.append(this.prev)
