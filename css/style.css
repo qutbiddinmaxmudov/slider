@@ -3,7 +3,7 @@
     margin: 0;
 }
 .slider{
-    max-width: 50%;
+    max-width: 1110px;
     margin: auto;
     margin-top: 50px;
     position: relative;
@@ -44,5 +44,7 @@ img{
     left: 0;
     top: 0;
     width: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
