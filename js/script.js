@@ -6,12 +6,12 @@ class Slider {
     for (let i = 0; i < this.slider.childNodes.length; i++) {
       const element = this.slider.childNodes[i];
       if (element.tagName == 'BUTTON') {
-        element.setAttribute('id','prev')
-        element.nextSibling.setAttribute('id','next')
-        element.classList == "" ? element.classList = 'prev':element.classList =element.classList
-        element.nextSibling.classList == "" ? element.nextSibling.classList = 'next':element.nextSibling.classList =element.classList
-        element.innerHTML == ""? element.classList += ' fas fa-arrow-left':element.innerHTML = element.innerHTML
-        element.nextSibling.innerHTML == ""? element.nextSibling.classList += ' fas fa-arrow-right':element.innerHTML = element.innerHTML
+        element.setAttribute('id', 'prev')
+        element.nextSibling.setAttribute('id', 'next')
+        element.classList == "" ? element.classList = 'prev' : element.classList = element.classList
+        element.nextSibling.classList == "" ? element.nextSibling.classList = 'next' : element.nextSibling.classList = element.classList
+        element.innerHTML == "" ? element.classList += ' fas fa-arrow-left' : element.innerHTML = element.innerHTML
+        element.nextSibling.innerHTML == "" ? element.nextSibling.classList += ' fas fa-arrow-right' : element.innerHTML = element.innerHTML
         break;
       }
     }
@@ -24,8 +24,8 @@ class Slider {
     this.moveDistance = this.direction == "X" ? this.maxWidth() + 'px' : this.maxHeight() + 'px'
     this.autoPlay = obj.autoPlay ? true : false
     this.autoPlayTime = obj.autoPlayTime ? obj.autoPlayTime < 3000 ? 3000 : obj.autoPlayTime : 5000
-    if (this.autoPlayTime<this.transition) {
-      this.autoPlayTime = this.transition*2
+    if (this.autoPlayTime < this.transition) {
+      this.autoPlayTime = this.transition * 2
     }
     for (let i = 0; i < this.images.length; i++) {
       const img = this.images[i];
@@ -48,13 +48,13 @@ class Slider {
         width: ${this.maxWidth()}px;
       }
       `
-      document.head.append(killBug)
+    document.head.append(killBug)
     this.sliderLine.style.height = this.maxHeight() + 'px'
     if (this.next && this.prev) {
       this.next.addEventListener('click', () => this.btnClick(this.next))
-    this.prev.addEventListener('click', () => this.btnClick(this.prev))
-    this.prev.addEventListener('mouseover', () => this.moveDebug('-'))
-    this.next.addEventListener('mouseover', () => this.moveDebug(''))
+      this.prev.addEventListener('click', () => this.btnClick(this.prev))
+      this.prev.addEventListener('mouseover', () => this.moveDebug('-'))
+      this.next.addEventListener('mouseover', () => this.moveDebug(''))
     }
   }
 
@@ -62,9 +62,9 @@ class Slider {
     this.next = document.createElement('button')
     this.prev = document.createElement('button')
     this.next.className = 'next fas fa-arrow-right'
-    this.next.setAttribute('id','next')
+    this.next.setAttribute('id', 'next')
     this.prev.className = 'prev fas fa-arrow-left'
-    this.prev.setAttribute('id','prev')
+    this.prev.setAttribute('id', 'prev')
     for (let i = 0; i < document.body.children.length; i++) {
       const element = document.body.children[i];
       if (!element.button && !element.next && !element.prev && element.classList.contains("slider")) {
@@ -111,7 +111,6 @@ class Slider {
     return maxWidth;
   }
   btnDisable(btns) {
-
     for (let i = 0; i < btns.length; i++) {
       const btn = btns[i];
       btn.disabled = true;
@@ -172,14 +171,14 @@ const slider = new Slider({
   autoPlayTime: 3000,
   button: true
 })
-const slider2 = new Slider({
-  name: '#slider2',
-  direction: 'y',
-  transition: 500,
-  autoPlay: true,
-  autoPlayTime: 3000,
-  button: false
-})
+// const slider2 = new Slider({
+//   name: '#slider2',
+//   direction: 'y',
+//   transition: 500,
+//   autoPlay: true,
+//   autoPlayTime: 3000,
+//   button: false
+// })
 
 const slider3 = new Slider({
   name: '#slider3',
