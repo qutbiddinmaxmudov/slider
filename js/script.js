@@ -80,7 +80,7 @@ class Slider {
     } else {
       this.move(this.prev, '-')
     }
-    this.btnDisable([this.prev, this.next])
+    if (this.next&&this.prev) {this.btnDisable([this.prev, this.next]);}
     clearInterval(this.interval);
     if (this.autoPlay) {
       setTimeout(this.autoMove(), this.autoPlayTime * 2)
@@ -90,7 +90,7 @@ class Slider {
   autoMove() {
     this.interval = setInterval(() => {
       this.move(this.next, '');
-      this.btnDisable([this.prev, this.next]);
+      if (this.next&&this.prev) {this.btnDisable([this.prev, this.next]);}
     }, this.autoPlayTime);
 
   }
@@ -171,14 +171,14 @@ const slider = new Slider({
   autoPlayTime: 3000,
   button: true
 })
-// const slider2 = new Slider({
-//   name: '#slider2',
-//   direction: 'y',
-//   transition: 500,
-//   autoPlay: true,
-//   autoPlayTime: 3000,
-//   button: false
-// })
+const slider2 = new Slider({
+  name: '#slider2',
+  direction: 'y',
+  transition: 500,
+  autoPlay: true,
+  autoPlayTime: 3000,
+  button: false
+})
 
 const slider3 = new Slider({
   name: '#slider3',
@@ -191,7 +191,7 @@ const slider3 = new Slider({
 
 const slider4 = new Slider({
   name: '#slider4',
-  direction: 'x',
+  direction: 'y',
   transition: 5000,
   autoPlay: true,
   autoPlayTime: 3000,
