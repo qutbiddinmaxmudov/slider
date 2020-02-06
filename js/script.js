@@ -17,7 +17,6 @@ class Slider {
     }
     this.next = this.slider.querySelector("#next")
     this.prev = this.slider.querySelector("#prev")
-    this.sliderLine.style.height = this.maxHeight() + 'px'
     this.transition = obj.transition ? obj.transition < 500 ? 500 : obj.transition : 500
     this.styleTransition = this.transition + 'ms'
     this.active = 0
@@ -25,6 +24,9 @@ class Slider {
     this.moveDistance = this.direction == "X" ? this.maxWidth() + 'px' : this.maxHeight() + 'px'
     this.autoPlay = obj.autoPlay ? true : false
     this.autoPlayTime = obj.autoPlayTime ? obj.autoPlayTime < 3000 ? 3000 : obj.autoPlayTime : 5000
+    if (this.autoPlayTime<this.transition) {
+      this.autoPlayTime = this.transition*2
+    }
     for (let i = 0; i < this.images.length; i++) {
       const img = this.images[i];
       if (i !== this.active) {
@@ -39,6 +41,15 @@ class Slider {
         this.createBtn()
       }
     }
+    const killBug = document.createElement('style')
+    killBug.innerHTML = `
+    ${obj.name} img{
+        height: ${this.maxHeight()}px;
+        width: ${this.maxWidth()}px;
+      }
+      `
+      document.head.append(killBug)
+    this.sliderLine.style.height = this.maxHeight() + 'px'
     this.next.addEventListener('click', () => this.btnClick(this.next))
     this.prev.addEventListener('click', () => this.btnClick(this.prev))
     this.prev.addEventListener('mouseover', () => this.moveDebug('-'))
@@ -69,7 +80,9 @@ class Slider {
     }
     this.btnDisable([this.prev, this.next])
     clearInterval(this.interval);
-    setTimeout(this.autoMove(), this.autoPlayTime * 2);
+    if (this.autoPlay) {
+      setTimeout(this.autoMove(), this.autoPlayTime * 2)
+    };
   }
 
   autoMove() {
@@ -152,21 +165,16 @@ class Slider {
 const slider = new Slider({
   name: '#slider',
   direction: 'x',
-  transition: 500,
+  transition: 1000,
   autoPlay: true,
   autoPlayTime: 3000,
   button: true
 })
-// const slider2 = new Slider({
-//   name: '#slider2',
-//   direction: 'x',
-//   transition: 2000
-// })
-// const slider3 = new Slider({
-//   name: '#slider3',
-//   direction: 'y',
-//   transition: 1000
-// })
-// const slider4 = new Slider({
-//   name: '#slider4'
-// })
+const slider2 = new Slider({
+  name: '#slider2',
+  direction: 'y',
+  transition: 1000,
+  autoPlay: false,
+  autoPlayTime: 3000,
+  button: true
+})
